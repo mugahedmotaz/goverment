@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدخال بيانات جواز السفر</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/services.css">
+    <style>
+        /* نفس التنسيقات السابقة */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form input[type="file"] {
+            width: 96%;
+            margin:10px 0;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>إدخال بيانات جواز السفر</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="passport-issuance.html">إصدار جواز السفر</a></li>
+                <li><a href="license-issuance.html">إصدار رخصة</a></li>
+                <li><a href="national-number-registration.html">تسجيل الرقم الوطني</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>الرجاء إدخال البيانات المطلوبة</h2>
+            <p>يرجى ملء النموذج أدناه بالمعلومات الصحيحة لإتمام طلب إصدار جواز السفر.</p>
+        </section>
+        <section>
+            <form id="passport-form">
+                <label for="full-name">الاسم الكامل:</label>
+                <input type="text" id="full-name" name="full-name" required>
+                
+                <label for="national-id">رقم الهوية الوطنية:</label>
+                <input type="text" id="national-id" name="national-id" required>
+                
+                <label for="birth-date">تاريخ الميلاد:</label>
+                <input type="date" id="birth-date" name="birth-date" required>
+                
+                <label for="address">العنوان:</label>
+                <input type="text" id="address" name="address" required>
+                
+                <label for="passport-photo">رفع صورة شخصية:</label>
+                <input type="file" id="passport-photo" name="passport-photo" accept="image/*" required>
+                
+                <button type="submit">إرسال البيانات</button>
+            </form>
+        </section>
+        <section>
+            <h2>اتصل بنا</h2>
+            <p>إذا كان لديك أي استفسارات، يرجى الاتصال بفريق الدعم لدينا:</p>
+            <p>البريد الإلكتروني: support@egovernment.com</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 الخدمات الحكومية الإلكترونية. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        document.getElementById("passport-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById("full-name").value;
+            const nationalId = document.getElementById("national-id").value;
+            const birthDate = document.getElementById("birth-date").value;
+            const address = document.getElementById("address").value;
+
+            // ملاحظة: لا يمكن حفظ الصورة نفسها في التخزين المحلي، فقط اسمها
+            const photoInput = document.getElementById("passport-photo");
+            const photoName = photoInput.files.length > 0 ? photoInput.files[0].name : "لم يتم رفع صورة";
+
+            const request = {
+                id: Date.now(),
+                type: "إصدار جواز سفر",
+                fullName,
+                nationalId,
+                birthDate,
+                address,
+                photo: photoName,
+                status: "قيد المعالجة"
+            };
+
+            let requests = JSON.parse(localStorage.getItem("requests") || "[]");
+            requests.push(request);
+            localStorage.setItem("requests", JSON.stringify(requests));
+
+            alert("تم إرسال طلب جواز السفر بنجاح ");
+
+            // إعادة تعيين النموذج
+            this.reset();
+        });
+    </script>
+</body>
+</html>
