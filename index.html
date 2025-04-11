@@ -18,6 +18,7 @@
                 <li><a href="national-number-registration.html">خدمة تسجيل الرقم الوطني</a></li>
             </ul>
         </nav>
+        <a href="./login.html">تسجيل الدخول </a>
     </header>
     <main>
         <section>
@@ -40,17 +41,7 @@
         <p>&copy; 2023 الخدمات الحكومية الإلكترونية. جميع الحقوق محفوظة.</p>
     </footer>
 
-    <script>
-        // التحقق من صلاحية تسجيل الدخول
-        document.addEventListener('DOMContentLoaded', function () {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
 
-            // إذا لم يكن المستخدم قد سجل دخوله، قم بتوجيهه إلى صفحة تسجيل الدخول
-            if (!isLoggedIn || isLoggedIn !== 'true') {
-                window.location.href = 'login.html'; // توجيه إلى صفحة تسجيل الدخول
-            }
-        });
-    </script>
 
     <script src="../assets/js/main.js"></script>
 </body>
