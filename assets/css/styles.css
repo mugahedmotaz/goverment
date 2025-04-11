@@ -4,7 +4,7 @@ html, body {
     padding: 0;
     font-family: Arial, sans-serif;
     direction: rtl; /* Right-to-left for Arabic */
-}<!DOCTYPE html>
+}<!DOCTYPE html dir="rtl">
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
