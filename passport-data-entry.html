@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -10,7 +11,7 @@
         /* نفس التنسيقات السابقة */
         form {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto;         
             padding: 20px;
             background-color: #f9f9f9;
             border: 1px solid #ddd;
@@ -115,7 +116,6 @@
             // ملاحظة: لا يمكن حفظ الصورة نفسها في التخزين المحلي، فقط اسمها
             const photoInput = document.getElementById("passport-photo");
             const photoName = photoInput.files.length > 0 ? photoInput.files[0].name : "لم يتم رفع صورة";
-
             const request = {
                 id: Date.now(),
                 type: "إصدار جواز سفر",
