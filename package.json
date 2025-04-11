@@ -1,0 +1,23 @@
+{
+  "name": "e-government-website",
+  "version": "1.0.0",
+  "description": "A comprehensive e-government website offering services such as passport issuance, license issuance, and national number registration in Arabic.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build process not defined'",
+    "test": "echo 'No tests defined'"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "e-government",
+    "passport",
+    "license",
+    "national number registration"
+  ]
+}
