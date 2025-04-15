@@ -1,0 +1,109 @@
+<!DOCTYPE html dir="rtl">
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>عرض الطلبات</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      direction: rtl;
+      background-color: white;
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .no-data {
+      text-align: center;
+      margin-top: 50px;
+      color: #777;
+      font-size: 18px;
+    }
+
+    a.back-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>الطلبات المسجلة</h1>
+  <div id="table-container"></div>
+
+  <a class="back-link" href="index.html">↩ العودة إلى الصفحة الرئيسية</a>
+
+  <script>
+    const requests = JSON.parse(localStorage.getItem("requests")) || [];
+    const container = document.getElementById("table-container");
+
+    if (requests.length === 0) {
+      container.innerHTML = '<p class="no-data">لا توجد طلبات مسجلة حتى الآن.</p>';
+    } else {
+      const table = document.createElement("table");
+
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>رقم الطلب</th>
+            <th>الاسم الكامل</th>
+            <th>تاريخ الميلاد</th>
+            <th>مكان الميلاد</th>
+            <th>اسم الملف</th>
+            <th>الخدمة</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${requests.map(req => `
+            <tr>
+              <td>${req.id}</td>
+              <td>${req.fullName}</td>
+              <td>${req.birthDate}</td>
+              <td>${req.placeOfBirth}</td>
+              <td>${req.fileName}</td>
+              <td>${req.service}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      `;
+
+      container.appendChild(table);
+    }
+  </script>
+</body>
+</html>
