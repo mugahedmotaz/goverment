@@ -24,7 +24,8 @@
 
         form input[type="text"],
         form input[type="date"],
-        form input[type="file"] {
+        form input[type="file"],
+        form input[type="number"] {
             width: 96%;
             padding: 10px;
             margin-bottom: 15px;
@@ -82,7 +83,7 @@
 
         <section>
             <div class="success-message" id="success-message" style="display: none;">
-                تم استلام البيانات بنجاح!
+                تم حفظ البيانات بنجاح في التخزين الداخلي!
             </div>
             <form id="license-form">
                 <label for="full-name">الاسم الكامل:</label>
@@ -123,18 +124,34 @@
     </footer>
 
     <script>
-        // تعيين تاريخ اليوم تلقائيًا
         window.onload = function () {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('birth-date').value = today;
         }
 
-        // عرض رسالة نجاح عند الإرسال
         document.getElementById('license-form').addEventListener('submit', function (e) {
-            e.preventDefault(); // منع الإرسال الفعلي
+            e.preventDefault();
+
+            // جمع البيانات
+            const formData = {
+                fullName: document.getElementById('full-name').value,
+                nationality: document.getElementById('nationality').value,
+                job: document.getElementById('job').value,
+                phoneNumber: document.getElementById('phone-number').value,
+                birthDate: document.getElementById('birth-date').value,
+                licenseType: document.getElementById('license-type').value,
+                // ملاحظة: لا يمكن تخزين الصور مباشرة في Local Storage بهذه الطريقة
+                licensePhoto: document.getElementById('license-photo').value
+            };
+
+            // تخزين البيانات في Local Storage
+            localStorage.setItem('licenseFormData', JSON.stringify(formData));
+
+            // عرض الرسالة
             document.getElementById('success-message').style.display = 'block';
-            this.reset(); // تفريغ النموذج بعد الإرسال
-            // إعادة تعيين التاريخ بعد التفريغ
+
+            // إعادة تعيين النموذج
+            this.reset();
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('birth-date').value = today;
         });
