@@ -204,9 +204,11 @@
             const doc = new jsPDF({orientation: "portrait", unit: "mm", format: "a4"});
 
             // دعم العربية
-            doc.setFont("courier", "normal");
+            doc.addFileToVFS("arabic-font.ttf", "your_base64_encoded_font_here"); // تأكد من إدراج الخط الذي يدعم العربية
+            doc.addFont("arabic-font.ttf", "arabic", "normal");
+            doc.setFont("arabic");
             doc.setFontSize(16);
-            doc.text(`تفاصيل مقدم الطلب`, 105, 30, { align: "center" });
+            doc.text("تفاصيل مقدم الطلب", 105, 30, { align: "center" });
             doc.text(`رقم الطلب: ${currentRequest.id}`, 20, 50);
             doc.text(`الاسم: ${currentRequest.name}`, 20, 60);
             doc.text(`الخدمة: ${currentRequest.service}`, 20, 70);
