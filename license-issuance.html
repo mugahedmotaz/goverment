@@ -52,6 +52,13 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -66,37 +73,43 @@
             </ul>
         </nav>
     </header>
+
     <main>
         <section>
             <h2>الرجاء إدخال البيانات المطلوبة</h2>
             <p>يرجى ملء النموذج أدناه بالمعلومات الصحيحة لإتمام طلب إصدار الرخصة.</p>
         </section>
+
         <section>
-            <form action="submit-license-data.html" method="post">
+            <div class="success-message" id="success-message" style="display: none;">
+                تم استلام البيانات بنجاح!
+            </div>
+            <form id="license-form">
                 <label for="full-name">الاسم الكامل:</label>
                 <input type="text" id="full-name" name="full-name" required>
-                
-                <label for="full-name">الجنسيه :</label>
-                <input type="text" id="full-name" name="full-name" required>
-                
-                <label for="full-name">المهنه :</label>
-                <input type="text" id="full-name" name="full-name" required>
-                
-                <label for="national-id">رقم الهاتف :</label>
+
+                <label for="nationality">الجنسيه :</label>
+                <input type="text" id="nationality" name="nationality" required>
+
+                <label for="job">المهنه :</label>
+                <input type="text" id="job" name="job" required>
+
+                <label for="phone-number">رقم الهاتف :</label>
                 <input type="text" id="phone-number" name="phone-number" required>
-                
-                <label for="birth-date">تاريخ الاصدار:</label>
+
+                <label for="birth-date">تاريخ الإصدار:</label>
                 <input type="date" id="birth-date" name="birth-date" required>
-                
+
                 <label for="license-type">نوع الرخصة:</label>
                 <input type="text" id="license-type" name="license-type" required>
-                
+
                 <label for="license-photo">رفع صورة شخصية:</label>
                 <input type="file" id="license-photo" name="license-photo" accept="image/*" required>
-                
+
                 <button type="submit">إرسال البيانات</button>
             </form>
         </section>
+
         <section>
             <h2>اتصل بنا</h2>
             <p>إذا كان لديك أي استفسارات، يرجى الاتصال بفريق الدعم لدينا:</p>
@@ -104,9 +117,27 @@
             <p>الهاتف: +123 456 7890</p>
         </section>
     </main>
+
     <footer>
         <p>&copy; 2023 الخدمات الحكومية الإلكترونية. جميع الحقوق محفوظة.</p>
     </footer>
-    <script src="../assets/js/main.js"></script>
+
+    <script>
+        // تعيين تاريخ اليوم تلقائيًا
+        window.onload = function () {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('birth-date').value = today;
+        }
+
+        // عرض رسالة نجاح عند الإرسال
+        document.getElementById('license-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // منع الإرسال الفعلي
+            document.getElementById('success-message').style.display = 'block';
+            this.reset(); // تفريغ النموذج بعد الإرسال
+            // إعادة تعيين التاريخ بعد التفريغ
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('birth-date').value = today;
+        });
+    </script>
 </body>
 </html>
